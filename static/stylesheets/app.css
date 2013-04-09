@@ -1,0 +1,125 @@
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+body {
+  background: url(/static/images/background.png) repeat;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 1.1em;
+}
+
+textarea {
+  font-family: 'PT Mono', monospace;
+}
+
+#results, #desc {
+  width: 100%;
+  min-height: 200px;
+  padding: 15px;
+  -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px;
+  background-color: #f0eeea;
+  box-shadow: 0px 0px 4px #888;
+  font-family: "PT Mono", monospace;
+  font-size: 14px;
+}
+
+.error {
+  box-shadow: 0px 0px 30px #a88 !important;
+  color: #773333 !important;
+}
+.line-error {
+  background-color: #ab1515 !important;
+  color: #fff !important;
+}
+
+hr {
+  border: 1px dotted #999;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #999;
+}
+
+.panel.yellow { 
+  background: #fff; 
+  border: 2px solid #888;
+  color: #666; 
+  padding: 14px 0px;
+  height: 55px;
+  width: 149px;
+}
+.panel.yellow.no-border {
+  border: 2px solid #fff;
+}
+
+.button.yellow { color: #666; background-color: #e3c78c; border: 1px solid #c18c1a; }
+.button.yellow:hover, .button.success:focus { background-color: #f4bf4e; }
+
+.optional {
+  border: 2px solid #aaa !important;
+}
+
+.center {
+  text-align: center;
+  margin: 0px;
+}
+
+.r-border {
+  border-right: 1px solid #666;
+}
+
+.light {
+  color: #888;
+}
+
+.address > div {
+  margin-bottom: 10px;
+}
+
+.finger:hover {
+  cursor: pointer;
+}
+
+.overdue {
+  background: #ffd5d5;
+}
+
+select, option {
+  font-size: 18px;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.left {
+  float: left;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+/* -----------------------------------------
+   Page Name 1
+----------------------------------------- */
+
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
