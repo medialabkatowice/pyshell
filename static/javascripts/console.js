@@ -1,15 +1,18 @@
 ;(function ($) {
     var code_mirror = CodeMirror(document.getElementById('editor'), {
-        value        : "# coding: utf-8\n# By uruchomić kod naciśnij Ctrl+Enter lub guzik Odpal powyżej\n\n",
+        value        : "# coding: utf-8\n\n",
         mode         : "python",
         indentUnit   : 4,
         lineNumbers  : true,
         lineWrapping : true,
         autofocus    : true
     });
-    code_mirror.setCursor(3, 0);
+    code_mirror.setCursor(2, 0);
 
-    $('#fire-up-button').click(function () {
+    // arm ctrl+enter as a submit shortcut
+    $(document).keydown(function (e) { 
+      if(e.ctrlKey && e.keyCode == 13) {
+
         var code = code_mirror.getValue();
         var ex_id = $(this).attr('data-ex_id');
 
@@ -38,12 +41,6 @@
                 }
             });
         }
-    });
-
-    // arm ctrl+enter as a submit shortcut
-    $(document).keydown(function (e) { 
-      if(e.ctrlKey && e.keyCode == 13) {
-        $('#fire-up-button').click();
       }
     });
 

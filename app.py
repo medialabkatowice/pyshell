@@ -64,7 +64,13 @@ def _index(ex_id=1):
            u"--------------------\n\n" + \
            open('exs/re_%03d.py' % ex_id).read().decode('utf-8')
 
-    return template('exercise', {'code': code, 'desc': desc, 'ex_id': ex_id})
+    sol  = open('exs/sl_%03d.py' % ex_id).read().decode('utf-8')
+    sol  = sol.replace('\n', '\\n').replace('"', '\\"')
+
+    return template('exercise', {'code': code, 
+                                 'desc': desc, 
+                                 'sol' : sol,
+                                 'ex_id': ex_id})
 
 @route('/tutorial/evaluate/<re_id:int>', method='POST')
 def _tutorial_eval(re_id):
@@ -88,6 +94,39 @@ def _tutorial_eval(re_id):
         result['value'] = msg % user_result
 
         return result
+
+
+# ---------> REGEXP SANDBOX
+@route('/regexp', method='GET')
+def _regexp():
+    return template('regexp')
+
+@route('/regexp/tutorial', method='GET')
+def _regexp_tutorial():
+    return template('regexp_tutorial')
+
+@route('/regexp/query', method='POST')
+def _query():
+    import re
+    import json as js
+
+    query  = request.POST.get('query', '').decode('utf-8')
+    text   = request.POST.get('text', '').decode('utf-8')
+    func   = request.POST.get('func', '')
+    substr = request.POST.get('substr', '')
+    
+    todo = {
+        'findall': re.findall,
+        'replace': lambda r, e: re.sub(r, substr, e),
+        'split'  : re.split
+    }[func]
+
+    regexp = re.compile(query, re.UNICODE)
+    # FIX Why the hell this if at the end of list comprehention?
+    result = [todo(regexp, unicode(line)) for line in text.split('\n') if regexp.search(line)]
+    
+    return js.dumps(result, ensure_ascii=False)
+
 
 
 # ------> EVALUATOR
@@ -193,7 +232,7 @@ def uni(code):
 if __name__ == '__main__':
     import sys
 
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 2 and sys.argv[1] == 'debug':
         run(app=app, host='localhost', port=8082, reloader=True)
     else:
         application = app

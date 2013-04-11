@@ -7,12 +7,20 @@
         lineWrapping: true,
         autofocus   : true
     });
+    var code_solution = CodeMirror(document.getElementById('solution'), {
+        value       : __ex_sol,
+        mode        :  "python",
+        indentUnit  : 4,
+        lineNumbers : true,
+        lineWrapping: true,
+        autofocus   : false,
+        readOnly    : true
+    });
 
 
-    $('#fire-up-button').click(function () {
+    $(document).keydown(function (e) { 
+      if(e.ctrlKey && e.keyCode == 13) {
         var code = code_mirror.getValue();
-        var ex_id = $(this).attr('data-ex_id');
-
         // validate if user doesn't want to import dengerous modules
         var dengerous = code.split('\n').filter(function (line) {
             var modules = ['sys', 'os'].filter(function (e) {
@@ -27,23 +35,17 @@
         }
         else {
             // execute the code
-            $.post('/tutorial/evaluate/'+ex_id, {'code': code}, function (data) {
+            $.post('/tutorial/evaluate/'+__ex_id, {'code': code}, function (data) {
                 $('#results').empty()
                              .removeClass('error')
                              .html(data['value'])
-                             .addClass(data.error ? 'error' : '')
+                             .addClass(data.error ? 'error' : 'great-success')
                 $('.CodeMirror-linenumber').removeClass('error');
                 if(data.line_number !== -1) {
                     $('.CodeMirror-linenumber:eq('+data.line_number+')').addClass('line-error');
                 }
             });
         }
-    });
-
-    // arm ctrl+enter as a submit shortcut
-    $(document).keydown(function (e) { 
-      if(e.ctrlKey && e.keyCode == 13) {
-        $('#fire-up-button').click();
       }
     });
 
