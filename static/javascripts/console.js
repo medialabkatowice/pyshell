@@ -1,6 +1,6 @@
 ;(function ($) {
     var code_mirror = CodeMirror(document.getElementById('editor'), {
-        value        : "# coding: utf-8\n\n",
+        value        : __code,
         mode         : "python",
         indentUnit   : 4,
         lineNumbers  : true,

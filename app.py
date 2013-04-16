@@ -40,8 +40,8 @@ def _main():
 
 # -------> CONSOLE
 @route('/console')
-def _console():
-    return template('console')
+def _console(code=None):
+    return template('console', {'code': code or '# coding: utf-8\\n\\n'})
 
 @route('/console/evaluate', method='POST')
 def _console_eval():
@@ -49,6 +49,18 @@ def _console_eval():
 
     return _evaluate(code)
 
+
+# -------> NOTATKI
+@route('/notes')
+def _notes():
+    return template('notes')
+
+@route('/notes/<note_id:int>')
+def _notes_code(note_id=0):
+    code = open('notes/%03d.py' % note_id).read()
+    code = code.replace('\n', '\\n').replace('"', '\\"')
+
+    return _console(code)
 
 # -------> TUTORIAL
 @route('/tutorial')

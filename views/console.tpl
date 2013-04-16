@@ -31,4 +31,8 @@
   </div>
 </div>
 
+<script>
+  var __code = "{{!code}}";
+</script>
+
 %rebase base js='console.js'
